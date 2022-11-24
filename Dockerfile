@@ -1,19 +1,51 @@
-FROM node:14
-
-RUN apt-get update \
-    && apt-get install -y libusb-1.0-0 libusb-1.0-0-dev libudev-dev \
-    && rm -rf /var/lib/apt/lists/*
+FROM node:14 as build
 
 WORKDIR /app
 
+ARG REACT_APP_GATEWAY_URL
+ARG REACT_APP_GOOGLE_ANALYTICS
+ARG REACT_APP_INFURA_TOKEN
+ARG REACT_APP_IPFS_GATEWAY
+ARG REACT_APP_DEFAULT_CHAIN_ID
+ARG REACT_APP_ASTRA_CHAIN_ID
+ARG REACT_APP_MUTI_SEND_ADDRESS
+ARG REACT_APP_MASTER_COPIES_ADDRESS
+ARG REACT_APP_PROXY_ADDRESS
+ARG REACT_APP_FALLBACK_HANDLER_ADDRESS
+ARG REACT_APP_APP_VERSION
+ARG REACT_APP_SENTRY_DSN
+
+
 COPY package.json yarn.lock .
-
-COPY  src/logic/contracts/artifacts ./src/logic/contracts/artifacts
-
 RUN yarn install
-
 COPY . .
 
-EXPOSE 3000
+RUN REACT_APP_GATEWAY_URL=${REACT_APP_GATEWAY_URL} \
+    REACT_APP_GOOGLE_ANALYTICS=${REACT_APP_GOOGLE_ANALYTICS} \
+    REACT_APP_INFURA_TOKEN=${REACT_APP_INFURA_TOKEN} \
+    REACT_APP_IPFS_GATEWAY=${REACT_APP_IPFS_GATEWAY} \
+    REACT_APP_DEFAULT_CHAIN_ID=${REACT_APP_DEFAULT_CHAIN_ID} \
+    REACT_APP_ASTRA_CHAIN_ID=${REACT_APP_ASTRA_CHAIN_ID} \
+    REACT_APP_MUTI_SEND_ADDRESS=${REACT_APP_MUTI_SEND_ADDRESS} \
+    REACT_APP_MASTER_COPIES_ADDRESS=${REACT_APP_MASTER_COPIES_ADDRESS} \
+    REACT_APP_PROXY_ADDRESS=${REACT_APP_PROXY_ADDRESS} \
+    REACT_APP_FALLBACK_HANDLER_ADDRESS=${REACT_APP_FALLBACK_HANDLER_ADDRESS} \
+    REACT_APP_APP_VERSION=${REACT_APP_APP_VERSION} \
+    REACT_APP_SENTRY_DSN=${REACT_APP_SENTRY_DSN} \
+    yarn build
 
-CMD ["yarn", "start"]
+FROM ubuntu
+
+RUN apt-get update
+
+RUN apt-get install nginx -y
+
+RUN rm /etc/nginx/nginx.conf
+COPY --from=build /app/docker/nginx.conf /etc/nginx/nginx.conf 
+COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/build /usr/share/nginx/html/app
+COPY --from=build /app/build/index.html /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
