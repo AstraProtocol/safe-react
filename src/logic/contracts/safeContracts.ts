@@ -11,7 +11,14 @@ import {
 import Web3 from 'web3'
 import { AbiItem } from 'web3-utils'
 
-import { LATEST_SAFE_VERSION } from 'src/utils/constants'
+import {
+  ASTRA_CHAIN_ID,
+  FALLBACK_HANDLER_ADDRESS,
+  LATEST_SAFE_VERSION,
+  MASTER_COPIES_ADDRESS,
+  MUTI_SEND_ADDRESS,
+  PROXY_ADDRESS,
+} from 'src/utils/constants'
 import { getChainById, _getChainId } from 'src/config'
 import { ChainId } from 'src/config/chain.d'
 import { ZERO_ADDRESS } from 'src/logic/wallets/ethAddresses'
@@ -68,8 +75,8 @@ const getSafeContractDeployment = ({ safeVersion }: { safeVersion: string }): Si
 const getGnosisSafeContractInstance = (web3: Web3, chainId: ChainId): GnosisSafe => {
   const safeSingletonDeployment = getSafeContractDeployment({ safeVersion: LATEST_SAFE_VERSION })
   let contractAddress = safeSingletonDeployment?.networkAddresses[chainId]
-  if (chainId === '11115') {
-    contractAddress = '0x33eF3698B7E794B249E5C94DAFCAc7FED509C663'
+  if (chainId === ASTRA_CHAIN_ID) {
+    contractAddress = MASTER_COPIES_ADDRESS
   }
   if (!contractAddress) {
     throw new Error(`GnosisSafe contract not found for chainId: ${chainId}`)
@@ -93,8 +100,8 @@ const getProxyFactoryContractInstance = (web3: Web3, chainId: ChainId): ProxyFac
       version: LATEST_SAFE_VERSION,
     })
   let contractAddress = proxyFactoryDeployment?.networkAddresses[chainId]
-  if (chainId === '11115') {
-    contractAddress = '0x9ede2D10e78c22919Bc3C22F53aeB6923Cb53FaE'
+  if (chainId === ASTRA_CHAIN_ID) {
+    contractAddress = PROXY_ADDRESS
     proxyFactoryDeployment =
       getProxyFactoryDeployment({
         version: LATEST_SAFE_VERSION,
@@ -128,8 +135,8 @@ const getFallbackHandlerContractInstance = (web3: Web3, chainId: ChainId): Compa
     })
   let contractAddress = fallbackHandlerDeployment?.networkAddresses[chainId]
 
-  if (chainId === '11115') {
-    contractAddress = '0x81510fFD6df3a1bcDe947019c9Ea6f645535Dcc5'
+  if (chainId === ASTRA_CHAIN_ID) {
+    contractAddress = FALLBACK_HANDLER_ADDRESS
   }
 
   if (!contractAddress) {
@@ -153,8 +160,8 @@ const getMultiSendContractInstance = (web3: Web3, chainId: ChainId): MultiSend =
       network: chainId.toString(),
     }) || getMultiSendCallOnlyDeployment()
   let contractAddress = multiSendDeployment?.networkAddresses[chainId]
-  if (chainId === '11115') {
-    contractAddress = '0x27e2191eD22695158F3Ce819A0B918F1Df913F65'
+  if (chainId === ASTRA_CHAIN_ID) {
+    contractAddress = MUTI_SEND_ADDRESS
   }
   if (!contractAddress) {
     throw new Error(`MultiSend contract not found for chainId: ${chainId}`)

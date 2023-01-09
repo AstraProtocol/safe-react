@@ -2,10 +2,20 @@ version: '3.2'
 
 services:
   safe-react:
-    build: ./
-    volumes:
-      - /app/node_modules
-      - /app/src/types/contracts
-      - ./:/app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_GATEWAY_URL: 'https://safe.astranaut.dev/api'
+        REACT_APP_GOOGLE_ANALYTICS: ''
+        REACT_APP_INFURA_TOKEN: ''
+        REACT_APP_IPFS_GATEWAY: 'https://ipfs.io/ipfs'
+        REACT_APP_DEFAULT_CHAIN_ID: 11115
+        REACT_APP_ASTRA_CHAIN_ID: 11115
+        REACT_APP_MUTI_SEND_ADDRESS: '0x11d70E46432011192e30E59E77D4cCb723E5ECFd'
+        REACT_APP_MASTER_COPIES_ADDRESS: '0x33eF3698B7E794B249E5C94DAFCAc7FED509C663'
+        REACT_APP_PROXY_ADDRESS: '0x9ede2D10e78c22919Bc3C22F53aeB6923Cb53FaE'
+        REACT_APP_FALLBACK_HANDLER_ADDRESS: '0x81510fFD6df3a1bcDe947019c9Ea6f645535Dcc5'
+        REACT_APP_APP_VERSION: '$npm_package_version'
     ports:
-      - 3000:3000
+      - 80:80
