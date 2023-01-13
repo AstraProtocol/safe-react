@@ -11,9 +11,9 @@ import { ChainId } from 'src/config/chain.d'
  * @returns {string|undefined}
  */
 const getSpendingLimitModuleAddress = (chainId: ChainId): string | undefined => {
-  const deployment = getAllowanceModuleDeployment({ network: chainId })
-
-  return deployment?.networkAddresses[chainId]
+  //   const deployment = getAllowanceModuleDeployment({ network: chainId })
+  const netwrokAddress = { '11115': '0xa5D7E64DB8A9a60Dcb7C28c2F82aCa552E8579bc' }
+  return netwrokAddress[chainId] //deployment?.networkAddresses[chainId]
 }
 
 /**
