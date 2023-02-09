@@ -178,6 +178,14 @@ export const getSafeSDK = async (signerAddress: string, safeAddress: string, saf
     isL1SafeMasterCopy = networkId === CHAIN_ID.ETHEREUM
   }
   const contractNetworks = {
+    '11110': {
+      multiSendAddress: '0xBEF246AA5b1592EFB80a5F4B8fcE496D8B74B016',
+      safeProxyFactoryAddress: '0x69ec99aadfA264008f1A6175575bcd0f19c5b3BE',
+      safeMasterCopyAddress: '0x32bf78c86E4E0ddC2FC713925E72312907F6eC5D',
+      multiSendAbi: multiSendAbi,
+      safeMasterCopyAbi: masterCopyAbi,
+      safeProxyFactoryAbi: proxyFactoryAbi,
+    },
     '11115': {
       multiSendAddress: '0x11d70E46432011192e30E59E77D4cCb723E5ECFd',
       safeProxyFactoryAddress: '0x9ede2D10e78c22919Bc3C22F53aeB6923Cb53FaE',

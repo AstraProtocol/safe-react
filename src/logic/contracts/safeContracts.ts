@@ -71,6 +71,9 @@ const getGnosisSafeContractInstance = (web3: Web3, chainId: ChainId): GnosisSafe
   if (chainId === '11115') {
     contractAddress = '0x33eF3698B7E794B249E5C94DAFCAc7FED509C663'
   }
+  if (chainId === '11110') {
+    contractAddress = '0x32bf78c86E4E0ddC2FC713925E72312907F6eC5D'
+  }
   if (!contractAddress) {
     throw new Error(`GnosisSafe contract not found for chainId: ${chainId}`)
   }
@@ -95,15 +98,18 @@ const getProxyFactoryContractInstance = (web3: Web3, chainId: ChainId): ProxyFac
   let contractAddress = proxyFactoryDeployment?.networkAddresses[chainId]
   if (chainId === '11115') {
     contractAddress = '0x9ede2D10e78c22919Bc3C22F53aeB6923Cb53FaE'
-    proxyFactoryDeployment =
-      getProxyFactoryDeployment({
-        version: LATEST_SAFE_VERSION,
-        network: '1',
-      }) ||
-      getProxyFactoryDeployment({
-        version: LATEST_SAFE_VERSION,
-      })
   }
+  if (chainId === '11110') {
+    contractAddress = '0x69ec99aadfA264008f1A6175575bcd0f19c5b3BE'
+  }
+  proxyFactoryDeployment =
+    getProxyFactoryDeployment({
+      version: LATEST_SAFE_VERSION,
+      network: '1',
+    }) ||
+    getProxyFactoryDeployment({
+      version: LATEST_SAFE_VERSION,
+    })
 
   if (!contractAddress) {
     throw new Error(`GnosisSafeProxyFactory contract not found for chainId: ${chainId}`)
@@ -131,6 +137,9 @@ const getFallbackHandlerContractInstance = (web3: Web3, chainId: ChainId): Compa
   if (chainId === '11115') {
     contractAddress = '0x81510fFD6df3a1bcDe947019c9Ea6f645535Dcc5'
   }
+  if (chainId === '11110') {
+    contractAddress = '0xEc8568D80050A35d118CCc4f3C3fa576aFe8F48f'
+  }
 
   if (!contractAddress) {
     throw new Error(`FallbackHandler contract not found for chainId: ${chainId}`)
@@ -155,6 +164,9 @@ const getMultiSendContractInstance = (web3: Web3, chainId: ChainId): MultiSend =
   let contractAddress = multiSendDeployment?.networkAddresses[chainId]
   if (chainId === '11115') {
     contractAddress = '0x27e2191eD22695158F3Ce819A0B918F1Df913F65'
+  }
+  if (chainId === '11110') {
+    contractAddress = '0xBEF246AA5b1592EFB80a5F4B8fcE496D8B74B016'
   }
   if (!contractAddress) {
     throw new Error(`MultiSend contract not found for chainId: ${chainId}`)
