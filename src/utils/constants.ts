@@ -57,3 +57,11 @@ const isProdGateway = () => {
 export const GATEWAY_URL =
   process.env.REACT_APP_GATEWAY_URL ||
   (IS_PRODUCTION || isProdGateway() ? 'https://safe-client.gnosis.io' : 'https://safe-client.staging.gnosisdev.com')
+
+// addresses
+export const ASTRA_CHAIN_ID = process.env.REACT_APP_ASTRA_CHAIN_ID || ''
+export const MUTI_SEND_ADDRESS = process.env.REACT_APP_MUTI_SEND_ADDRESS || ''
+export const MASTER_COPIES_ADDRESS = process.env.REACT_APP_MASTER_COPIES_ADDRESS || ''
+export const PROXY_ADDRESS = process.env.REACT_APP_PROXY_ADDRESS || ''
+export const FALLBACK_HANDLER_ADDRESS = process.env.REACT_APP_FALLBACK_HANDLER_ADDRESS || ''
+export const ALLOWANCE_MODULE_ADDRESS = process.env.REACT_APP_ALLOWANCE_MODULE_ADDRESS || ''

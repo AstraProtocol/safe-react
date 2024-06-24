@@ -14,7 +14,7 @@ import AlertRedIcon from './assets/alert-red.svg'
 import IntercomIcon from './assets/intercom.png'
 import { useSafeAppUrl } from 'src/logic/hooks/useSafeAppUrl'
 import { loadGoogleTagManager, unloadGoogleTagManager } from 'src/utils/googleTagManager'
-import { loadBeamer, unloadBeamer } from 'src/utils/beamer'
+// import { loadBeamer, unloadBeamer } from 'src/utils/beamer'
 
 const isDesktop = process.env.REACT_APP_BUILD_FOR_DESKTOP
 
@@ -288,7 +288,7 @@ const CookiesBanner = isDesktop
 
       // Toggle Beamer
       useEffect(() => {
-        localSupportAndUpdates ? loadBeamer() : unloadBeamer()
+        // localSupportAndUpdates ? loadBeamer() : unloadBeamer()
       }, [localSupportAndUpdates])
 
       return (

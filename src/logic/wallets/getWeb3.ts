@@ -1,3 +1,4 @@
+import { ASTRA_CHAIN_ID, MASTER_COPIES_ADDRESS, MUTI_SEND_ADDRESS, PROXY_ADDRESS } from './../../utils/constants'
 import semverSatisfies from 'semver/functions/satisfies'
 import Web3 from 'web3'
 import { Contract } from 'web3-eth-contract'
@@ -178,10 +179,10 @@ export const getSafeSDK = async (signerAddress: string, safeAddress: string, saf
     isL1SafeMasterCopy = networkId === CHAIN_ID.ETHEREUM
   }
   const contractNetworks = {
-    '11115': {
-      multiSendAddress: '0x11d70E46432011192e30E59E77D4cCb723E5ECFd',
-      safeProxyFactoryAddress: '0x9ede2D10e78c22919Bc3C22F53aeB6923Cb53FaE',
-      safeMasterCopyAddress: '0x33eF3698B7E794B249E5C94DAFCAc7FED509C663',
+    [ASTRA_CHAIN_ID]: {
+      multiSendAddress: MUTI_SEND_ADDRESS,
+      safeProxyFactoryAddress: PROXY_ADDRESS,
+      safeMasterCopyAddress: MASTER_COPIES_ADDRESS,
       multiSendAbi: multiSendAbi,
       safeMasterCopyAbi: masterCopyAbi,
       safeProxyFactoryAbi: proxyFactoryAbi,

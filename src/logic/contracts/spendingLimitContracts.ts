@@ -4,6 +4,7 @@ import { getAllowanceModuleDeployment } from '@gnosis.pm/safe-modules-deployment
 import { getWeb3 } from 'src/logic/wallets/getWeb3'
 import { AllowanceModule } from 'src/types/contracts/allowance-module.d'
 import { ChainId } from 'src/config/chain.d'
+import { ALLOWANCE_MODULE_ADDRESS, ASTRA_CHAIN_ID } from 'src/utils/constants'
 
 /**
  * Returns an address of the deployed AllowanceModule contract. Returns undefined if no address found.
@@ -11,9 +12,9 @@ import { ChainId } from 'src/config/chain.d'
  * @returns {string|undefined}
  */
 const getSpendingLimitModuleAddress = (chainId: ChainId): string | undefined => {
-  const deployment = getAllowanceModuleDeployment({ network: chainId })
-
-  return deployment?.networkAddresses[chainId]
+  //   const deployment = getAllowanceModuleDeployment({ network: chainId })
+  const netwrokAddress = { [ASTRA_CHAIN_ID]: ALLOWANCE_MODULE_ADDRESS }
+  return netwrokAddress[chainId] //deployment?.networkAddresses[chainId]
 }
 
 /**

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { ReactElement } from 'react'
 import { MobileView } from 'react-device-detect'
 
-import Phone from 'src/components/AppLayout/MobileStart/assets/phone@2x.png'
+// import Phone from 'src/components/AppLayout/MobileStart/assets/phone@2x.png'
 
 const Overlay = styled.div`
   display: block;
@@ -26,14 +26,13 @@ const ModalApp = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   box-shadow: 1px 2px 10px rgba(40, 54, 61, 0.18);
   z-index: 2147483004; /* on top of Intercom Button */
-  padding: 20px 16px 0 16px;
+  padding: 20px 16px 16 16px;
 `
 
 const StyledCard = styled(Card)`
   background-color: #fdfdfd;
   /*   width: 45vw; */
   min-width: 245px;
-  height: 220px;
   padding: 24px 58px 24px 24px;
   box-sizing: border-box;
   box-shadow: none;
@@ -46,29 +45,29 @@ const StyledCard = styled(Card)`
     min-width: 215px;
   }
 `
-const StyledImg = styled.img`
-  margin: 24px -81px 0 -58px;
-  z-index: 1;
-  width: 45%;
-  height: auto;
-  object-fit: cover;
+// const StyledImg = styled.img`
+//   margin: 24px -81px 0 -58px;
+//   z-index: 1;
+//   width: 45%;
+//   height: auto;
+//   object-fit: cover;
 
-  @media (max-width: 340px) {
-    display: none;
-  }
+//   @media (max-width: 340px) {
+//     display: none;
+//   }
 
-  @media (min-width: 430px) {
-    width: 30%;
-  }
+//   @media (min-width: 430px) {
+//     width: 30%;
+//   }
 
-  @media (min-width: 720px) {
-    width: 25%;
-  }
+//   @media (min-width: 720px) {
+//     width: 25%;
+//   }
 
-  @media (min-width: 800px) {
-    width: 20%;
-  }
-`
+//   @media (min-width: 800px) {
+//     width: 20%;
+//   }
+// `
 
 const StyledCloseIcon = styled(Icon)`
   margin: 0 34px;
@@ -91,16 +90,20 @@ const StyledCloseIcon = styled(Icon)`
 `
 const StyledButton = styled(Button)`
   background-color: transparent;
-  min-width: 0;
-
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  max-width: 75px;
+  min-width: auto;
+  padding: 5px;
   :hover {
     background-color: transparent;
   }
 `
 
-const StyledLink = styled.a`
-  text-decoration: none;
-`
+// const StyledLink = styled.a`
+//   text-decoration: none;
+// `
 
 type Props = {
   onClose: () => void
@@ -112,18 +115,20 @@ export const MobileNotSupported = ({ onClose }: Props): ReactElement => {
       <Overlay>
         <ModalApp>
           <StyledCard>
-            <Text size="lg">The Astra Safe web app is not optimized for mobile.</Text>
-            <Text size="lg">Get the mobile app for a better experience.</Text>
-            <Button size="md" color="primary" variant="contained">
+            <Text size="xl" center>
+              The Astra Safe web app is not optimized for mobile.
+            </Text>
+            {/* <Text size="lg">Get the mobile app for a better experience.</Text> */}
+            {/* <Button size="md" color="primary" variant="contained">
               <StyledLink target="_blank" href="https://gnosis-safe.io/#mobile" rel="noopener noreferrer">
                 <Text color="white" size="xl">
                   Get the App
                 </Text>
               </StyledLink>
-            </Button>
+            </Button> */}
           </StyledCard>
 
-          <StyledImg src={Phone} alt="Phone" />
+          {/* <StyledImg src={Phone} alt="Phone" /> */}
           <StyledButton size="md" variant="outlined" color="primary" onClick={onClose}>
             <StyledCloseIcon size="md" type="cross" />
           </StyledButton>
